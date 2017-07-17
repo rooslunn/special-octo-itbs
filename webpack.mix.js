@@ -1,5 +1,7 @@
 let mix = require('laravel-mix');
 
+mix.disableNotifications();
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -13,3 +15,8 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.styles([
+    'public/css/dashboard.css',
+    'public/css/ie10-viewport-bug-workaround.css'
+], 'public/css/plus.css');

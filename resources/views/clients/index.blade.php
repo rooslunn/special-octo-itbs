@@ -1,1 +1,4 @@
-<h4>List of Clients</h4>
+@extends('layouts.app')
+
+@section('client_list')
+@endsection

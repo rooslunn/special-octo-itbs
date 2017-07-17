@@ -1,22 +1,42 @@
+(function ($) {
+    "use strict";
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+    const apiUrl = "/api/clients";
+    const $table = $('#id__client_list');
 
-require('./bootstrap');
+    $.fn.clientList = function (action, apiUrl) {
+        if (action === "clear") {
+            this.html("");
+            return this;
+        }
 
-window.Vue = require('vue');
+        if (action === "load") {
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+            let table = this;
+            $.get(apiUrl)
+                .done(function (data) {
+                    table.html('');
+                    let html = '';
+                    data.forEach(function (client) {
+                        html += `<tr data_cleint_id="${client['id']}">`;
+                        html += `<td">${client['id']}</td>`;
+                        html += `<td>${client['name']}</td>`;
+                        html += `<td>${client['surname']}</td>`;
+                        html += `<td>${client['code']}</td>`;
+                        html += `<td>${client['email']}</td>`;
+                        html += `<td>${client['address']}</td>`;
+                        html += `<td>${client['town']}</td>`;
+                        html += `<td>${client['country']}</td>`;
+                        html += '</tr>';
+                    });
+                    table.html(html);
+                }).fail(function (err) {
+                    console.error(err);
+                });
+        }
+    }
 
-Vue.component('example', require('./components/Example.vue'));
+    $table.clientList('load', apiUrl);
 
-const app = new Vue({
-    el: '#app'
-});
+
+}(jQuery));

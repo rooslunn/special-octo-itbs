@@ -38,7 +38,7 @@ class ClientController extends Controller
 
     public function delete(int $id)
     {
-        $result = $this->clientService->delete($id);
-        return response()->json($result, 200);
+        $this->clientService->delete($id);
+        return response()->json(null, 204);
     }
 }
