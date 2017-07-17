@@ -73,13 +73,39 @@ module.exports = __webpack_require__(2);
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 (function ($) {
     "use strict";
 
+    __webpack_require__(7);
+
     var apiUrl = "/api/clients";
     var $table = $('#id__client_list');
+
+    $table.clientList('load', apiUrl);
+})(jQuery);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */
+/***/ (function(module, exports) {
+
+/**
+ * Created by russ on 17.07.17.
+ */
+
+(function ($) {
+    "use strict";
 
     $.fn.clientList = function (action, apiUrl) {
         if (action === "clear") {
@@ -111,15 +137,7 @@ module.exports = __webpack_require__(2);
             });
         }
     };
-
-    $table.clientList('load', apiUrl);
 })(jQuery);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
