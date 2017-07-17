@@ -45,12 +45,12 @@
             <a class="navbar-brand" href="#">ITBS Client Manager</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            {{--<ul class="nav navbar-nav navbar-right">--}}
-                {{--<li><a href="#">Dashboard</a></li>--}}
+            <ul class="nav navbar-nav navbar-right">
+                {{--<li><a href="#">Add Client</a></li>--}}
                 {{--<li><a href="#">Settings</a></li>--}}
                 {{--<li><a href="#">Profile</a></li>--}}
                 {{--<li><a href="#">Help</a></li>--}}
-            {{--</ul>--}}
+            </ul>
             {{--<form class="navbar-form navbar-right">--}}
                 {{--<input type="text" class="form-control" placeholder="Search...">--}}
             {{--</form>--}}
@@ -61,7 +61,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="main">
-            <h2 class="sub-header">Clients</h2>
+            <h2 class="sub-header">Clients
+                <button type="button" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+                </button>
+            </h2>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -74,6 +78,8 @@
                         <th>Адрес</th>
                         <th>Город</th>
                         <th>Страна</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody id="id__client_list">

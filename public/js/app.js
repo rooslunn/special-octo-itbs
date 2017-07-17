@@ -83,7 +83,11 @@ module.exports = __webpack_require__(2);
     var apiUrl = "/api/clients";
     var $table = $('#id__client_list');
 
-    $table.clientList('load', apiUrl);
+    $table.clientList('load', apiUrl, function clientEdit() {
+        console.info('Edit: ' + $(this).data('client_id'));
+    }, function clientDelete() {
+        console.info('Delete: ' + $(this).data('client_id'));
+    });
 })(jQuery);
 
 /***/ }),
@@ -107,7 +111,7 @@ module.exports = __webpack_require__(2);
 (function ($) {
     "use strict";
 
-    $.fn.clientList = function (action, apiUrl) {
+    $.fn.clientList = function (action, apiUrl, editAction, deleteAction) {
         if (action === "clear") {
             this.html("");
             return this;
@@ -120,8 +124,8 @@ module.exports = __webpack_require__(2);
                 table.html('');
                 var html = '';
                 data.forEach(function (client) {
-                    html += "<tr data_cleint_id=\"" + client['id'] + "\">";
-                    html += "<td\">" + client['id'] + "</td>";
+                    html += "<tr class=\"client-row\" data_cleint_id=\"" + client['id'] + "\">";
+                    html += "<td>" + client['id'] + "</td>";
                     html += "<td>" + client['name'] + "</td>";
                     html += "<td>" + client['surname'] + "</td>";
                     html += "<td>" + client['code'] + "</td>";
@@ -129,14 +133,25 @@ module.exports = __webpack_require__(2);
                     html += "<td>" + client['address'] + "</td>";
                     html += "<td>" + client['town'] + "</td>";
                     html += "<td>" + client['country'] + "</td>";
+                    html += '<td>' + ("<button type=\"button\" data-client_id=\"" + client['id'] + "\" class=\"button-edit\">") + '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>' + '</button>' + '</td>';
+                    html += '<td>' + ("<button type=\"button\" data-client_id=\"" + client['id'] + "\" class=\"button-delete\">") + '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + '</button>' + '</td>';
                     html += '</tr>';
                 });
                 table.html(html);
+
+                if ($.type(editAction) === 'function') {
+                    $('.button-edit').bind("click", editAction);
+                }
+                if ($.type(deleteAction) === 'function') {
+                    $('.button-delete').bind("click", deleteAction);
+                }
             }).fail(function (err) {
                 console.error(err);
             });
         }
     };
+
+    $.fn.clientAction = function () {};
 })(jQuery);
 
 /***/ })
